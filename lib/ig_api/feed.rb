@@ -56,6 +56,7 @@ module IgApi
     end
 
     def self.user_followers_next_page(user, user_id, data)
+      @api = Http.singleton
       endpoint = "https://i.instagram.com/api/v1/friendships/#{user_id}/followers/"
       param = "?rank_token=#{data[:rank_token]}" +
               (!data[:max_id].nil? ? '&max_id=' + data[:max_id] : '')
