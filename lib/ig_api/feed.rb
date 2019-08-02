@@ -59,11 +59,7 @@ module IgApi
       endpoint = "https://i.instagram.com/api/v1/friendships/#{user_id}/followers/"
       param = "?rank_token=#{data[:rank_token]}" +
               (!data[:max_id].nil? ? '&max_id=' + data[:max_id] : '')
-      result = IgApi::Http.http(
-        url: endpoint + param,
-        method: 'GET',
-        user: user
-      )
+      result = @api.get(endpoint + param).with(session: user[:session], ua: user[:ua]).exec
       JSON.parse result.body, object_class: OpenStruct
     end
   end
