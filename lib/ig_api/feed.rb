@@ -45,7 +45,7 @@ module IgApi
       has_next_page = true
       followers = []
       user_id = (!data[:id].nil? ? data[:id] : user.data[:id])
-      data[:rank_token] = IgApi::API.generate_rank_token user.session.scan(/ds_user_id=([\d]+);/)[0][0]
+      data[:rank_token] = IgApi::Http.generate_rank_token user.session.scan(/ds_user_id=([\d]+);/)[0][0]
       while has_next_page && limit > followers.size
         response = user_followers_next_page(user, user_id, data)
         has_next_page = !response['next_max_id'].nil?
