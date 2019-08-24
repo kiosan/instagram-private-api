@@ -50,7 +50,7 @@ module IgApi
         response = user_followers_next_page(user, user_id, data)
         has_next_page = !response['next_max_id'].nil?
         data[:max_id] = response['next_max_id']
-        followers += response['users']
+        followers += response['users'] || []
       end
       limit.infinite? ? followers : followers[0...limit]
     end
