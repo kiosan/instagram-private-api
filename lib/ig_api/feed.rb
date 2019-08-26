@@ -28,7 +28,7 @@ module IgApi
     end
 
     def timeline_media(params = {})
-      user_id = @user[:id]
+      user_id = params[:user_id] || @user[:id]
 
       rank_token = IgApi::Http.generate_rank_token @user[:id]
       endpoint = Constants::URL + "feed/user/#{user_id}/"
